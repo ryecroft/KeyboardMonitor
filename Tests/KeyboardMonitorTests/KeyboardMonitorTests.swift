@@ -6,7 +6,7 @@ final class KeyboardMonitorTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(KeyboardMonitor().text, "Hello, World!")
+//        XCTAssertEqual(KeyboardMonitor().text, "Hello, World!")
     }
 
     static var allTests = [
