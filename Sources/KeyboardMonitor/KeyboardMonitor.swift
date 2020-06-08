@@ -18,6 +18,9 @@ import UIKit
   }
   
   
+  @objc open var keyboardVisible = false
+  
+  
   @objc public static let shared: KeyboardMonitor = KeyboardMonitor()
   
   
@@ -32,6 +35,8 @@ import UIKit
     super.init()
     NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification , object: nil)
     NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification , object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidShow(_:)), name: UIResponder.keyboardDidShowNotification , object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardDidHide(_:)), name: UIResponder.keyboardDidHideNotification , object: nil)
   }
   
   
@@ -63,6 +68,16 @@ import UIKit
     guard let kf = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
     keyboardFrame = kf
     _notifyDelegates(changeType: .hide)
+  }
+  
+  
+  @objc func keyboardDidShow(_ notification: NSNotification) {
+    keyboardVisible = true
+  }
+  
+  
+  @objc func keyboardDidHide(_ notification: NSNotification) {
+    keyboardVisible = false
   }
 
 }
